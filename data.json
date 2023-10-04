@@ -2,7 +2,7 @@
   "blogs": [
     {
       "id": 5,
-      "title": "Fifth Blog Post",
+      "title": "Fifth Blog Posts",
       "date": "May 20, 2023",
       "content": "This is the content of the fifth blog post.",
       "imageUrl": "https://source.unsplash.com/random/480x360?5"
