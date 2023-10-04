@@ -38,7 +38,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <hr className="" />
     </header>
   );
 }
