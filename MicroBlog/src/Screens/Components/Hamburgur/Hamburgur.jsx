@@ -15,6 +15,7 @@ export default function Hamburgur({ handleDelete }) {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    handleDelete()
     setAnchorEl(null);
   };
 
@@ -51,7 +52,7 @@ export default function Hamburgur({ handleDelete }) {
             selected={option === "Pyxis"}
             onClick={handleClose}
           >
-            <div onClick={handleDelete}>{option}</div>
+            <div>{option}</div>
           </MenuItem>
         ))}
       </Menu>
