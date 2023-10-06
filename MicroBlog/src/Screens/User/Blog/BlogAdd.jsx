@@ -1,7 +1,14 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const BlogAdd = ({ handleSubmit, setPost, post }) => {
+
+  
+  useEffect(() => {
+      setimagePreview(post.imageUrl);
+  }, []);
+
+
   const handleChange = (event) => {
     setPost({
       ...post,
@@ -28,6 +35,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
       reader.readAsDataURL(file); // Read the selected image as a data URL
     }
   };
+
 
   const handleFormSubmit = (event) => {
     event.preventDefault();

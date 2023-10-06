@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 import Hamburgur from "../../Components/Hamburgur/Hamburgur";
-export default function Blog({ data, handleDelete }) {
+ export default function Blog({ data, handleDelete, handleEdit }) {
   return (
     <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline">
       <div className="flex flex-col justify-end w-full items-end">
-        <Hamburgur handleDelete={() => handleDelete(data.id)} />
+        <Hamburgur
+          handleDelete={() => handleDelete(data.id)}
+          handleEdit={() => handleEdit(data.id)}
+        />
       </div>
       <img
         role="presentation"
@@ -34,4 +37,5 @@ Blog.propTypes = {
     title: PropTypes.any,
   }),
   handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func,
 };

@@ -5,10 +5,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-const options = ["Delete"];
+const options = ["Delete", "Edit"];
 const ITEM_HEIGHT = 48;
 
-export default function Hamburgur({ handleDelete }) {
+export default function Hamburgur({ handleDelete,handleEdit }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -48,10 +48,15 @@ export default function Hamburgur({ handleDelete }) {
         {options.map((option) => (
           <MenuItem
             key={option}
-            selected={option === "Pyxis"}
             onClick={() => {
-              handleDelete();
-              handleClose();
+              if (option === "Delete") {
+                handleDelete();
+                handleClose();
+              }
+              if(option === "Edit"){
+                handleEdit();
+                handleClose();
+              }
             }}
           >
             <div>{option}</div>
@@ -63,5 +68,6 @@ export default function Hamburgur({ handleDelete }) {
 }
 
 Hamburgur.propTypes = {
-  handleDelete: PropTypes.any,
-};
+  handleDelete: PropTypes.func,
+  handleEdit: PropTypes.func
+}

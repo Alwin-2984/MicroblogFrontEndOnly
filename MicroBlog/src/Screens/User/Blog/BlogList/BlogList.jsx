@@ -1,10 +1,15 @@
 import Blog from "../Blog";
-import { useBlogListApi } from "../../../../API/BlogListApi";
+import {
+  BlogAddApi,
+  BlogDeleteApi,
+  fetchBlogApiById,
+  useBlogListApi,
+} from "../../../../API/BlogListApi";
 import GlobalToaster from "../../../Components/Toasters/GlobalToaster";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import BlogAdd from "../BlogAdd";
+import BlogEditModal from "../BlogEditModal";
 
 const BlogList = () => {
   const [post, setPost] = useState({
@@ -14,9 +19,21 @@ const BlogList = () => {
     imageUrl: "",
   });
 
+  const [blogById, setBlogById] = useState(undefined);
+
+  let [isOpen, setIsOpen] = useState(false);
+
   const isPosting = useSelector((state) => state.search.searchData);
 
   const { isLoading, error, data, refetch } = useBlogListApi();
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   useEffect(() => {
     error && GlobalToaster("Something went wrong", 405, ["error"], 3000);
@@ -29,7 +46,7 @@ const BlogList = () => {
     const formdata = { ...data, date: formattedDate };
     try {
       // Send a DELETE request to your API endpoint with the ID of the item to delete
-      await axios.post(`http://localhost:3000/blogs`, formdata);
+      await BlogAddApi(formdata);
       GlobalToaster("Posted Successfully", 405, ["success"], 3000);
       // Refetch the data to update the UI
       setPost({
@@ -40,17 +57,26 @@ const BlogList = () => {
       });
       refetch();
     } catch (error) {
-      console.error("Error deleting item:", error);
+      GlobalToaster("Somethins went wrong!", 405, ["error"], 3000);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/blogs/${id}`);
+      await BlogDeleteApi(id);
+      GlobalToaster("Deleted Successfully", 405, ["success"], 3000);
       refetch();
     } catch (error) {
-      console.error("Error deleting item:", error);
+      GlobalToaster("Somethins went wrong!", 405, ["error"], 3000);
+
     }
+  };
+
+  const handleEdit = async (id) => {
+    const blogById = await fetchBlogApiById(id); // Use a function to fetch data with an ID
+    setBlogById(blogById);
+    openModal();
+    console.log(id);
   };
 
   return (
@@ -75,7 +101,11 @@ const BlogList = () => {
                 <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {data?.map((post, index) => (
                     <div className="p-2 rounded-md bg-slate-50" key={index}>
-                      <Blog data={post} handleDelete={handleDelete} />
+                      <Blog
+                        data={post}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                      />
                     </div>
                   ))}
                 </div>
@@ -84,6 +114,12 @@ const BlogList = () => {
           </div>
         </div>
       )}
+      <BlogEditModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        blogById={blogById}
+        refetch={refetch}
+      />
     </>
   );
 };
