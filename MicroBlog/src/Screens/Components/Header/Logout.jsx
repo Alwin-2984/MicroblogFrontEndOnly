@@ -34,9 +34,8 @@ export default function Logout() {
                 />
 
                 <p className="ms-2 hidden text-left text-xs sm:block">
-                  <strong className="block font-medium">Eric Frusciante</strong>
+                  <strong className="block font-medium">Profile</strong>
 
-                  <span className="text-gray-500"> eric@frusciante.com </span>
                 </p>
 
                 <svg
