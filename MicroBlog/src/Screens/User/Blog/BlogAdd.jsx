@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const BlogAdd = ({ handleSubmit, setPost, post }) => {
 
-  
+
   useEffect(() => {
       setimagePreview(post.imageUrl);
   }, []);
@@ -53,13 +53,13 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
               name="title"
               value={post?.title}
               onChange={handleChange}
-              className="focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+              className="focus:outline-none block w-full p-3 text-sm text-gray-800 bg-slate-100 border-0 h-9 rounded-md"
               placeholder="Write a title..."
               required
             />
-            <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-              <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
-                <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
+            <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
+              <div className="flex items-center justify-between px-3 py-2 border-b">
+                <div className="flex flex-wrap items-center divide-gray-200 sm:divide-x">
                   <div className="flex items-center space-x-1 sm:pr-4">
                     <input
                       type="file"
@@ -85,7 +85,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
                     </label>
                     <button
                       type="button"
-                      className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+                      className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
                     >
                       <svg
                         className="w-4 h-4"
@@ -102,7 +102,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
                   <div className="flex flex-wrap items-center space-x-1 sm:pl-4">
                     <button
                       type="button"
-                      className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+                      className="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
                     >
                       <svg
                         className="w-4 h-4"
@@ -127,13 +127,13 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
                 <div
                   id="tooltip-fullscreen"
                   role="tooltip"
-                  className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+                  className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip "
                 >
                   Show full screen
                   <div className="tooltip-arrow" data-popper-arrow></div>
                 </div>
               </div>
-              <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+              <div className="px-4 py-2 bg-white rounded-b-lg">
                 <label htmlFor="editor" className="sr-only">
                   Publish post
                 </label>
@@ -145,7 +145,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
                   id="editor"
                   aria-multiline
                   rows="8"
-                  className=" focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                  className=" focus:outline-none block w-full px-0 text-sm text-gray-800 bg-white border-0"
                   placeholder="Write an article..."
                   required
                 />
@@ -154,7 +154,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
             {imagePreview && (
               <div className="w-full flex justify-center">
                 <img
-                  className="object-cover  rounded h-44 dark:dark:bg-gray-500"
+                  className="object-cover  rounded h-44"
                   src={imagePreview}
                 />
               </div>
@@ -163,7 +163,7 @@ const BlogAdd = ({ handleSubmit, setPost, post }) => {
             <button
               onClick={handleFormSubmit}
               type="submit"
-              className="w-32 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
+              className="w-32 inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800"
             >
               Publish post
             </button>
