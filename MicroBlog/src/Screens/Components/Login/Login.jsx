@@ -6,22 +6,54 @@ import { useNavigate } from "react-router-dom";
 import DynamicForm from "./DynamicForm";
 import { initialValuesFunction } from "./initialValuesFunction";
 import { yupValidation } from "./yupValidation";
-import GlobalToaster from "../Toasters/GlobalToaster";
-import axios from "axios";
+import { RegistrationAndLogin } from "../../../API/ApiServices";
+import { ToasterWithLoading } from "../Toasters/ToasterWithLoading";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setloginTabCondition } from "../../../reducers/loginTabSlice";
 function Login({ signUp }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const initialValues = initialValuesFunction(signUp);
   const validationSchema = yupValidation(signUp);
 
-  // we can redirect with signup condition for login and register here but i can't create custom json-server routs for some reason so i cant create registar and login saparately so i leave it like this
-  const handleSubmit = async (data) => {
+  const [apiCallInProgress, setApiCallInProgress] = useState(false);
+
+  // Function to handle form submission
+  const handleSubmit = (values) => {
+    if (apiCallInProgress) {
+      return; // Don't proceed if an API call is already in progress
+    }
+
+    setApiCallInProgress(true);
+    // eslint-disable-next-line no-unused-vars
+    const { confirmPassword, ...userData } = values;
     try {
-      const response = await axios.post(`http://localhost:3000/users`, data);
-      localStorage.setItem("Profile", JSON.stringify(response));
-      GlobalToaster("Login Successfully", 405, ["success"], 3000);
-      navigate("/dashboard/home");
-    } catch (error) {
-      console.error("Error deleting item:", error);
+      const apiPromise = new Promise((resolve, reject) => {
+        RegistrationAndLogin(userData, signUp)
+          .then((response) => {
+            resolve(response);
+            localStorage.setItem("Profile", JSON.stringify(response));
+            if (!signUp) {
+              navigate("/dashboard/home");
+            } else {
+              dispatch(setloginTabCondition(1));
+            }
+          })
+          .catch((error) => {
+            setApiCallInProgress(false);
+            reject(error);
+          });
+      });
+
+      // Handle errors in form submission
+      ToasterWithLoading(
+        apiPromise,
+        "loading",
+        signUp ? "Registered Successfully" : "Login Success"
+      );
+    } catch (err) {
+      setApiCallInProgress(false);
     }
   };
 
@@ -31,16 +63,6 @@ function Login({ signUp }) {
         <div className="  w-1/4 max-xl:w-1/3 max-md:w-1/2 max-sm:w-full">
           <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
             <div className="px-5 py-7">
-              <div className="font-bold text-center text-2xl mb-3">
-                <div className="logo">
-                  <h3 className="font-semibold text-xl text-gray-600">
-                    Micro
-                    <span className="font-semibold text-xl text-violet-700">
-                      Blog
-                    </span>
-                  </h3>
-                </div>
-              </div>
               <DynamicForm
                 signUp={signUp}
                 handleSubmit={handleSubmit}

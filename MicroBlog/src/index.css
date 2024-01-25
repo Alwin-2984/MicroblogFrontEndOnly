@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+* {
+  box-sizing: border-box;
+}
+
 #root {
   width: 100vw;
   max-height: 100vh;

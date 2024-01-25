@@ -19,7 +19,7 @@ export const FormField = ({ values, setFieldValue, label, name, type }) => {
   const [onSetDefaultValuePrenent, setonSetDefaultValuePrenent] =
     useState(true);
   return (
-    <div className="min-h-[100px]">
+    <div className="min-h-[65px]">
       <label className="font-semibold text-sm text-gray-600 pb-1 block">
         {label}
       </label>

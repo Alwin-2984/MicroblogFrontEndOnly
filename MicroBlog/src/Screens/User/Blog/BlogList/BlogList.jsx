@@ -23,7 +23,7 @@ const BlogList = () => {
 
   let [isOpen, setIsOpen] = useState(false);
 
-  const isPosting = useSelector((state) => state.search.searchData);
+  const isPosting = useSelector((state) => state.post.postCondition);
 
   const { isLoading, error, data, refetch } = useBlogListApi();
 
@@ -68,7 +68,6 @@ const BlogList = () => {
       refetch();
     } catch (error) {
       GlobalToaster("Somethins went wrong!", 405, ["error"], 3000);
-
     }
   };
 

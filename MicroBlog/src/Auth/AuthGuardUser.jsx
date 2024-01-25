@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 const AuthGuardUser = (props) => {
   const location = useLocation();
   const profile = JSON.parse(localStorage.getItem("Profile"));
-  const token = profile;
+  const token = profile?.data.accessToken;
 
   if (!token) {
     // User is not authenticated, redirect to the login page

@@ -1,25 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  searchData: false,
+  postCondition: false,
  
 };
 
 export const counterSlice = createSlice({
-  name: "search",
+  name: "post",
   initialState,
   reducers: {
-    setSearchData: (state, action) => {
-      state.searchData = action.payload;
+    setPostCondition: (state, action) => {
+      state.postCondition = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
-  setSearchData,
+  setPostCondition,
 } = counterSlice.actions;
-export const getSearchData = (state) => state?.search?.searchData;
+export const getPostCondition = (state) => state?.search?.postCondition;
 
 
 export default counterSlice.reducer;

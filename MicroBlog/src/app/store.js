@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchReducer from "../reducers/searchSlice";
+import postReducer from "../reducers/postSlice";
+import loginTabSlice from "../reducers/loginTabSlice";
 
 export const store = configureStore({
   reducer: {
-    search: searchReducer,
+    post: postReducer,
+    login: loginTabSlice,
   },
 });

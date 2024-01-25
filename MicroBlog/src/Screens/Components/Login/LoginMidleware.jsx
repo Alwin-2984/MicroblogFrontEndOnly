@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import Login from "./Login";
 import CloseIcon from "@mui/icons-material/Close";
 import HomeIcon from "@mui/icons-material/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { setloginTabCondition } from "../../../reducers/loginTabSlice";
 
 // Function to render custom tab panel with conditional rendering of content
 function CustomTabPanel(props) {
@@ -49,6 +51,20 @@ function a11yProps(index) {
 export default function LoginMidleware({ isOrganiser, Close }) {
   const [value, setValue] = useState(1); // State for handling tab selection
   const navigate = useNavigate(); // React Router's navigate function for navigation
+  const dispatch = useDispatch();
+
+  const loginTabCondition = useSelector(
+    (state) => state.login.loginTabCondition
+  );
+  
+  useEffect(() => {
+    loginTabCondition == 0 && setValue(0);
+    loginTabCondition == 1 && setValue(1);
+  }, [loginTabCondition]);
+
+  useEffect(() => {
+    dispatch(setloginTabCondition(value));
+  }, [dispatch, value]);
 
   // Function to handle tab change
   const handleChange = (event, newValue) => {

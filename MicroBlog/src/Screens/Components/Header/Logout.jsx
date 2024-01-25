@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function Logout() {
   const navigate = useNavigate();
+  const profile = JSON.parse(localStorage.getItem("Profile"));
 
   // Function to handle user logout
   const logout = () => {
     localStorage.removeItem("Profile");
-    navigate("/userLogin"); 
+    navigate("/userLogin");
     window.location.reload();
   };
 
@@ -34,8 +35,9 @@ export default function Logout() {
                 />
 
                 <p className="ms-2 hidden text-left text-xs sm:block">
-                  <strong className="block font-medium">Profile</strong>
-
+                  <strong className="block font-medium">
+                    {profile?.data.name}
+                  </strong>
                 </p>
 
                 <svg
@@ -63,9 +65,12 @@ export default function Logout() {
             >
               <Popover.Panel className="absolute left-1/2 z-10 mt-3  max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                  <div onClick={logout} className="relative grid bg-white p-3 ">
+                  <button
+                    onClick={logout}
+                    className="relative grid bg-white p-3 "
+                  >
                     Logout
-                  </div>
+                  </button>
                 </div>
               </Popover.Panel>
             </Transition>

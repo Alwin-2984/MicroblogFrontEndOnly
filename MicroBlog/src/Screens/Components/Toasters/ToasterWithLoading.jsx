@@ -16,12 +16,13 @@ export function ToasterWithLoading(apiPromise, loadingMessage, successMessage) {
       loading: loadingMessage,
       success: successMessage,
       error: (error) => {
-        // Display the error message from the API response
         const data = error.response.data;
+
+        // Display the error message from the API response
         const firstDataItem = Array.isArray(data) ? data[0] : data;
         const errorMessage =
           errorCodes[firstDataItem.errorCode] ||
-          firstDataItem.errorMessage ||
+          firstDataItem.error ||
           "Unknown error occurred";
 
         return errorMessage;
