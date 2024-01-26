@@ -68,3 +68,24 @@
   max-width: 78vw !important;
   z-index: 1000 !important;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 1px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1 !important;
+  border-radius: 5px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+}

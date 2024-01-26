@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Hamburgur from "../../Components/Hamburgur/Hamburgur";
- export default function Blog({ data, handleDelete, handleEdit }) {
+ export default function Blog({ data, handleDelete, handleEdit,isResto }) {
   return (
     <div className="max-w-sm mx-auto group hover:no-underline focus:no-underline">
       <div className="flex flex-col justify-end w-full items-end">
@@ -11,17 +11,17 @@ import Hamburgur from "../../Components/Hamburgur/Hamburgur";
       </div>
       <img
         role="presentation"
-        className="object-cover w-full rounded h-44 "
+        className={isResto ? "object-cover w-full rounded h-60 " :  "object-cover w-full rounded h-44 "}
         src={data.imageUrl}
         alt={data.title}
       />
 
       <div className="space-y-2">
-        <h3 className="text-2xl font-semibold group-hover:underline group-focus:underline">
+        <h3 className="text-base font-semibold group-hover:underline group-focus:underline">
           {data.title}
         </h3>
         <span className="text-xs ">{data.date}</span>
-        <pre className="break-words whitespace-break-spaces">
+        <pre className="text-sm break-words whitespace-break-spaces">
           {data.content}
         </pre>
       </div>
@@ -34,8 +34,9 @@ Blog.propTypes = {
     date: PropTypes.any,
     id: PropTypes.any,
     imageUrl: PropTypes.any,
-    title: PropTypes.any,
+    title: PropTypes.any
   }),
   handleDelete: PropTypes.func,
   handleEdit: PropTypes.func,
-};
+  isResto: PropTypes.any
+}

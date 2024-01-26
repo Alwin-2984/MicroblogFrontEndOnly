@@ -5,32 +5,32 @@ const UserLayout = lazy(() => import("./Screens/User/Dashboard/UserLayout"));
 const NotFound = lazy(() => import("./Screens/Components/NotFound404"));
 
 import "./routes.css";
-import LoginPage from "./Screens/User/LoginAndRegistration/LoginPage";
+// import LoginPage from "./Screens/User/LoginAndRegistration/LoginPage";
 // import LoginAuthUser from "./Auth/LoginAuthUser";
 import BlogList from "./Screens/User/Blog/BlogList/BlogList";
 import BlogAdd from "./Screens/User/Blog/BlogAdd";
-import LoginAuthUser from "./Auth/LoginAuthUser";
-import AuthGuardUser from "./Auth/AuthGuardUser";
+// import LoginAuthUser from "./Auth/LoginAuthUser";
+// import AuthGuardUser from "./Auth/AuthGuardUser";
 
 export default function Routes() {
   return (
     <Suspense fallback={<div id="loader" />}>
       {useRoutes([
-        {
-          path: "/userLogin",
-          element: (
-            <LoginAuthUser>
-              <LoginPage />
-            </LoginAuthUser>
-          ),
-        },
+        // {
+        //   path: "/userLogin",
+        //   element: (
+        //     <LoginAuthUser>
+        //       <LoginPage />
+        //     </LoginAuthUser>
+        //   ),
+        // },
         {
           path: "/dashboard",
 
           element: (
-            <AuthGuardUser>
+            // <AuthGuardUser>
               <UserLayout />
-            </AuthGuardUser>
+            // </AuthGuardUser>
           ),
           children: [
             { element: <Navigate to="home" />, index: true },
